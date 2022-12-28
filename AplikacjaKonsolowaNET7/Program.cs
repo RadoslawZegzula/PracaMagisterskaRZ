@@ -42,9 +42,11 @@ public class Program
         return ObliczWartoscZeWstawianiem(wartosc123) * wartosc7;
     }
 
-    private int ObliczWartoscZeWstawianiem(int dlugosc)
+    private int ObliczWartoscZeWstawianiem(
+        int dlugosc)
     {
-        return dlugosc * wartosc8;
+        return dlugosc 
+            * wartosc8;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -55,9 +57,11 @@ public class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private int ObliczWartoscBezWstawiania(int length)
+    private int ObliczWartoscBezWstawiania(
+        int dlugosc)
     {
-        return length * wartosc8;
+        return dlugosc 
+            * wartosc8;
     }
 
     [Benchmark]
@@ -65,15 +69,24 @@ public class Program
         _wartosc,
         _bufer,
         out _,
-        new StandardFormat(formatD, wartosc3));
+        new StandardFormat(
+            formatD,
+            wartosc3));
 
-    private int[] _values = Enumerable.Range(0, 100_000).ToArray();
+    private int[] _values = Enumerable.Range(
+        0,
+        100_000)
+        .ToArray();
     
     [Benchmark]
-    public int ZnajdzElement() => Znajdz(_values, 99_000);
+    public int ZnajdzElement() => Znajdz(
+        _values,
+        99_000);
 
 
-    private static int Znajdz<T>(T[] array, T item)
+    private static int Znajdz<T>(
+        T[] array,
+        T item)
     {
         for (int i = 0; i < array.Length; i++)
             if (EqualityComparer<T>.Default.Equals(array[i], item))
@@ -82,16 +95,30 @@ public class Program
         return -1;
     }
 
-    private (int, long, int, long) wartosci1 = (3, 11, 14, 19);
+    private (int, long, int, long) wartosci1 
+        = (
+        3,
+        11, 
+        14, 
+        19
+        );
 
-    private (int, long, int, long) wartosci2 = (3, 11, 14, 19);
+    private (int, long, int, long) wartosci2 
+        = (
+        3,
+        11,
+        14, 
+        19
+        );
 
     [Benchmark]
-    public int Porównaj() => wartosci1.CompareTo(wartosci2);
+    public int Porównaj() => 
+        wartosci1.CompareTo(wartosci2);
 
 
     [Benchmark]
-    public int Pobieraniedługości() => ((ITuple)(6, 7, 8)).Length;
+    public int Pobieraniedługości() 
+        => ((ITuple)(6, 7, 8)).Length;
 
 
     [Benchmark]
@@ -103,9 +130,14 @@ public class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Ignore(object o) { }
+    private static void Ignore(
+        object o) { }
 
-    private IEnumerator<int> zrodlo = Enumerable.Range(0, int.MaxValue).GetEnumerator();
+    private IEnumerator<int> zrodlo = 
+        Enumerable.Range(
+            0, 
+            int.MaxValue)
+        .GetEnumerator();
 
 /// <summary>
 /// Część druga
@@ -183,13 +215,23 @@ public class Program
     private char znak_C = 'c';
 
     [Benchmark(Baseline = true)]
-    public void CzyszczenieTablicy() => Array.Clear(tablica, 0, tablica.Length);
+    public void CzyszczenieTablicy() => Array.Clear(
+        tablica, 
+        0, 
+        tablica.Length);
 
     [Benchmark]
-    public void WypełnijKolekcje() => tablica.AsSpan().Fill(znak_C);
+    public void WypełnijKolekcje() => tablica
+        .AsSpan()
+        .Fill(
+        znak_C);
 
     //[Benchmark]
-    //public void PiszDoPlikuAsynchornicznie() => File.WriteAllTextAsync(sciezka, zawartosci);
+    //public void PiszDoPlikuAsynchornicznie() => File.WriteAllTextAsync(
+    //sciezka,
+    //zawartosci);
     //[Benchmark]
-    //public void WypełnijKolekcje2() => Array.Fill(tablica, znak_C);
+    //public void WypełnijKolekcje2() => Array.Fill(
+    //tablica,
+    //znak_C);
 }
