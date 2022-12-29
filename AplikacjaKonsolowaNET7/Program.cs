@@ -181,26 +181,25 @@ public class Program
     public void Read()
     {
         potokPliku.Position = 0;
-        while (potokPliku.Read(wielkosBufora
-#if !NETCOREAPP2_1_OR_GREATER
-                , 0, wielkosBufora.Length
-#endif
-                ) != 0) ;
+        while (potokPliku
+            .Read(
+            wielkosBufora,
+            0,
+            wielkosBufora.Length)
+            != 0) ;
     }
 
     [Benchmark]
     public async Task ReadAsync()
     {
         potokPliku.Position = 0;
-        while (await potokPliku.ReadAsync(wielkosBufora
-#if !NETCOREAPP2_1_OR_GREATER
-                , 0, wielkosBufora.Length
-#endif
-                ) != 0) ;
+        while (await potokPliku
+            .ReadAsync(
+            wielkosBufora,
+            0,
+            wielkosBufora.Length) != 0);
     }
 
-
- 
    private static string zawartosci = string.Concat(
        Enumerable.Range(0, 100_000)
        .Select(i => (char)('a' + (i % 26))));
