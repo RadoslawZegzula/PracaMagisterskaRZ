@@ -200,10 +200,11 @@ public class Program
             wielkosBufora.Length) != 0);
     }
 
-   private static string zawartosci = string.Concat(
+    private static string sciezka = Path.GetRandomFileName();
+    private static string zawartosci = string.Concat(
        Enumerable.Range(0, 100_000)
        .Select(i => (char)('a' + (i % 26))));
-   private static string sciezka = Path.GetRandomFileName();
+   
 
     [Benchmark]
     public void Zapisuj() => File.WriteAllText(
